@@ -78,12 +78,7 @@ def generate_puzzle_from_solution_4x4(solution: np.ndarray,
 
 
 def randomize_solution_from_base_4x4(base_solution: np.ndarray) -> np.ndarray:
-    """
-    4x4 base solution에 대해:
-    - 숫자 permute(1~4)
-    - 행 band(0-1,2-3) permute + band 내 row permute
-    - 열 band(0-1,2-3) permute + band 내 col permute
-    """
+
     s = base_solution.copy()
 
     digits = np.arange(1, 5)
@@ -283,21 +278,7 @@ class Sudoku4Env:
         return mask
 
     def _state_to_graph(self) -> Data:
-        """
-        4x4:
-        - cell node: 16
-        - row meta: 4
-        - col meta: 4
-        - block meta(2x2): 4
-        => 총 28 nodes
-        feature dim (12):
-          [0:5): digit one-hot (0~4)
-          [5]:   is_given
-          [6]:   is_meta
-          [7:10): meta_type (row/col/block) one-hot
-          [10]:  row_norm
-          [11]:  col_norm
-        """
+
         board = self.state
         puzzle = self.current.puzzle
 
@@ -524,20 +505,7 @@ class Sudoku9Env:
         return mask
 
     def _state_to_graph(self) -> Data:
-        """
-        9x9:
-        - cell: 81
-        - row meta: 9
-        - col meta: 9
-        - block meta: 9
-        => 108 nodes
-        feat_dim=14:
-          [0:10): digit one-hot (0=empty)
-          [10]: is_given
-          [11]: is_meta
-          [12]: row_norm
-          [13]: col_norm
-        """
+ 
         board = self.state
         puzzle = self.current.puzzle
 
@@ -999,12 +967,12 @@ def demo_episode(agent: PPOAgent, env, max_steps=200, board_size=9):
 
         if done:
             if info["quality"] == target_cells:
-                print(f"✅ 퍼즐 완성! (step {t+1})")
+                print(f"퍼즐 완성! (step {t+1})")
             else:
-                print(f"⛔ 종료 (step {t+1}, quality={info['quality']})")
+                print(f"종료 (step {t+1}, quality={info['quality']})")
             break
     else:
-        print(f"⏱ max_steps({max_steps}) 도달")
+        print(f"max_steps({max_steps}) 도달")
 
 
 def main():
