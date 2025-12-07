@@ -35,58 +35,60 @@
 
 ---
 
-## 3. 환경 및 요구사항
+3. 환경 및 요구사항
 
-### 3.1 Python & 라이브러리
+이 프로젝트는 아래 환경에서 테스트되었습니다.
 
-- Python 3.9+
-- PyTorch
-- PyTorch Geometric
-- NumPy
-- Matplotlib
+3.1 Python & 라이브러리 버전
 
-예시 설치(환경에 맞게 수정 필요):
+필수 라이브러리:
 
-```bash
+Python 3.9+
+
+PyTorch
+
+PyTorch Geometric (PyG)
+
+NumPy
+
+Matplotlib
+
+설치 예시(CUDA/MPS 환경에 따라 버전은 조정 필요):
+
 pip install torch torchvision torchaudio
 pip install torch-geometric
 pip install numpy matplotlib
 
-## 4. 기본 실행 (config 없이)
+
+⚠️ PyTorch Geometric 설치는 PyTorch 버전에 맞게 해야 합니다.
+정확한 설치 명령은 https://pytorch-geometric.readthedocs.io
+ 에서 확인하세요.
+
+4. 실행 방법
+4.1 기본 실행 (config 없이)
+4×4 스도쿠 학습
 python sudoku_rl.py --size 4
 
-
-4x4 스도쿠 학습을 기본 하이퍼파라미터로 진행합니다.
-
+9×9 스도쿠 학습
 python sudoku_rl.py --size 9
 
+4.2 실행 옵션 설명
+옵션	설명
+--size {4,9}	스도쿠 크기 선택 (4×4 또는 9×9)
+--single_base	하나의 base solution만 사용하고, 퍼즐(힌트 위치)만 다양화
+--single_puzzle	힌트가 주어지는 위치 패턴을 하나로 고정 (base solution이 바뀌어도 힌트 위치 동일)
+--num_instances	학습에 사용할 (퍼즐, 정답) 쌍 개수
+--config	JSON 형식의 config 파일 경로
 
-9x9 스도쿠 학습을 기본 하이퍼파라미터로 진행합니다.
+이 옵션들은 CLI 인자가 우선이며, config 파일에도 동일 키가 있을 경우 CLI 값이 적용됩니다.
 
-옵션 설명:
+4.3 config 파일을 사용하는 실행 예시
 
---size {4,9}
-스도쿠 크기 선택 (4x4 또는 9x9)
+예) 4×4 스도쿠를 config 기반으로 실행:
 
---single_base
-하나의 base solution만 사용하고, 힌트 위치/퍼즐만 여러 개 생성
-
---single_puzzle
-힌트가 주어지는 위치 패턴을 하나로 고정
-(즉, base solution이 달라져도 같은 위치가 주어짐)
-
---num_instances
-학습에 사용할 (퍼즐, 정답) 쌍 개수
-
---config
-JSON 형식의 설정 파일 경로
-
-### 4.1 config 파일을 사용하는 실행 예시
 python sudoku_rl.py --size 4 --config configs/sudoku4.json
 
-
-예를 들어, configs/sudoku4.json 을 다음과 같이 작성할 수 있습니다:
-
+4.4 4×4 config 파일 예시 (configs/sudoku4.json)
 {
   "seed": 0,
   "size": 4,
@@ -110,3 +112,13 @@ python sudoku_rl.py --size 4 --config configs/sudoku4.json
   "batch_size_4x4": 16,
   "num_updates_4x4": 300
 }
+
+✔️ 설명
+
+single_base: true 면 정답 solution은 고정
+
+single_puzzle: true 면 힌트 위치 패턴도 고정
+
+즉, 하나의 퍼즐 구조를 반복 학습하는 설정 → 단일 퍼즐 학습에 최적화됨
+
+lr, entropy_coef, rollout_steps 등 PPO 핵심 파라미터는 config로 변경 가능
