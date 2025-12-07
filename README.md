@@ -52,7 +52,7 @@ pip install torch torchvision torchaudio
 pip install torch-geometric
 pip install numpy matplotlib
 
-4. 기본 실행 (config 없이)
+## 4. 기본 실행 (config 없이)
 python sudoku_rl.py --size 4
 
 
@@ -81,7 +81,7 @@ python sudoku_rl.py --size 9
 --config
 JSON 형식의 설정 파일 경로
 
-4.1 config 파일을 사용하는 실행 예시
+### 4.1 config 파일을 사용하는 실행 예시
 python sudoku_rl.py --size 4 --config configs/sudoku4.json
 
 
