@@ -35,11 +35,11 @@
 
 ---
 
-3. 환경 및 요구사항
+## 3. 환경 및 요구사항
 
 이 프로젝트는 아래 환경에서 테스트되었습니다.
 
-3.1 Python & 라이브러리 버전
+### 3.1 Python & 라이브러리 버전
 
 필수 라이브러리:
 
@@ -64,15 +64,15 @@ pip install numpy matplotlib
 정확한 설치 명령은 https://pytorch-geometric.readthedocs.io
  에서 확인하세요.
 
-4. 실행 방법
-4.1 기본 실행 (config 없이)
+## 4. 실행 방법
+### 4.1 기본 실행 (config 없이)
 4×4 스도쿠 학습
 python sudoku_rl.py --size 4
 
 9×9 스도쿠 학습
 python sudoku_rl.py --size 9
 
-4.2 실행 옵션 설명
+### 4.2 실행 옵션 설명
 옵션	설명
 --size {4,9}	스도쿠 크기 선택 (4×4 또는 9×9)
 --single_base	하나의 base solution만 사용하고, 퍼즐(힌트 위치)만 다양화
@@ -82,13 +82,13 @@ python sudoku_rl.py --size 9
 
 이 옵션들은 CLI 인자가 우선이며, config 파일에도 동일 키가 있을 경우 CLI 값이 적용됩니다.
 
-4.3 config 파일을 사용하는 실행 예시
+### 4.3 config 파일을 사용하는 실행 예시
 
 예) 4×4 스도쿠를 config 기반으로 실행:
 
 python sudoku_rl.py --size 4 --config configs/sudoku4.json
 
-4.4 4×4 config 파일 예시 (configs/sudoku4.json)
+### 4.4 4×4 config 파일 예시 (configs/sudoku4.json)
 {
   "seed": 0,
   "size": 4,
