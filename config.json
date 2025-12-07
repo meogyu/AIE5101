@@ -1,0 +1,32 @@
+{
+    "size": 4,
+    "gamma": 0.99,
+    "clip_eps": 0.2,
+    "lr": 0.0001,
+    "value_coef": 0.5,
+    "entropy_coef": 0.001,
+  
+    "num_instances": 300,
+    "single_base": false,
+    "single_puzzle": false,
+  
+    "max_steps_4x4": 20,
+    "max_steps_9x9": 200,
+  
+    "in_dim_4x4": 12,
+    "hidden_dim_4x4": 64,
+    "num_layers_4x4": 3,
+    "rollout_steps_4x4": 64,
+    "ppo_epochs_4x4": 4,
+    "batch_size_4x4": 16,
+    "num_updates_4x4": 1000,
+  
+    "in_dim_9x9": 14,
+    "hidden_dim_9x9": 512,
+    "num_layers_9x9": 6,
+    "rollout_steps_9x9": 512,
+    "ppo_epochs_9x9": 4,
+    "batch_size_9x9": 64,
+    "num_updates_9x9": 1000
+  }
+  
